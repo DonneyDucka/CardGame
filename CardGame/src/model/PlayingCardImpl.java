@@ -2,15 +2,15 @@ package model;
 
 import model.interfaces.PlayingCard;
 
-public abstract class PlayingCardImpl implements PlayingCard {
+public class PlayingCardImpl implements PlayingCard {
 
 	private Suit suit;
 	private Value value;
 
-	public PlayingCardImpl(Suit suit, Value value) {
-
-		this.suit = suit;
-		this.value = value;
+	public PlayingCardImpl(Suit s, Value v) {
+		this.suit = s;
+		this.value = v;
+		
 	}
 
 	public Suit getSuit() {
@@ -68,11 +68,12 @@ public abstract class PlayingCardImpl implements PlayingCard {
 		return score;
 	}
 
-	public boolean equals(PlayingCardImpl card) {
+	public boolean equals(PlayingCard card) {
 		
-		
-		
-		
+		if (suit == card.getSuit() && value == card.getValue()) {
+			
+			return true;
+		} else return false;	
 	}
 
 }

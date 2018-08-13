@@ -3,7 +3,7 @@ package model;
 import model.interfaces.Player;
 import view.GameEngineCallbackImpl;
 
-public abstract class SimplePlayer implements Player {
+public class SimplePlayer implements Player {
 
 	private String name;
 	private String id;
@@ -67,9 +67,14 @@ public abstract class SimplePlayer implements Player {
 		bet = 0;		
 	}
 
-	//public int getResult() {}
+	public int getResult() {
+		int a = 0;
+		return a;
+	}
 	
-	//public void setResult(int result) {}
+	public void setResult(int result) {
+		
+	}
 	
 	public String toString() {
 		

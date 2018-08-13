@@ -9,20 +9,23 @@ import java.util.LinkedList;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import model.interfaces.PlayingCard;
+import model.interfaces.PlayingCard.Suit;
+import model.interfaces.PlayingCard.Value;
 import view.GameEngineCallbackImpl;
+import model.PlayingCardImpl;
 import view.interfaces.GameEngineCallback;
 
-public abstract class GameEngineImpl implements GameEngine {
+public class GameEngineImpl implements GameEngine {
 
 	private ArrayList<Player> players;
 	private ArrayList<GameEngineCallback> callbacks;
-	private Deque<PlayingCard> pc = new LinkedList<PlayingCard>();
+	private ArrayList<PlayingCard> pc = new ArrayList<PlayingCard>();
+	
+	
 
 	public GameEngineImpl() {
 
 	}	
-
-	public static final int BUST_LEVEL = 21;
 
 	public void dealPlayer(Player player, int delay) {
 	}
@@ -103,15 +106,17 @@ public abstract class GameEngineImpl implements GameEngine {
 	}
 
 	public Deque<PlayingCard> getShuffledDeck() {
-		    
-		  for (Integer number : pc) {
-		     System.out.println("Number = " + number);
-		  }
-
-		  Collections.shuffle(list);
-		  Deque<Integer> deque = new ArrayDeque<Integer>(list);
-		 
-		  int retval = deque.getFirst();
-		  System.out.println("Retrieved Element is = " + retval);
-	}
+	
+		for (Suit s : Suit.values()) {
+		    for (Value v : Value.values()) {
+		    	PlayingCardImpl c = new PlayingCardImpl(s,v);
+		    	
+		    }  
+		}	
+    Collections.shuffle(pc);
+	
+	Deque<PlayingCard> shuffledDeck = new LinkedList<PlayingCard>(pc);
+		
+	return shuffledDeck; }		
+	
 }
