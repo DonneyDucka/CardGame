@@ -17,28 +17,48 @@ import view.interfaces.GameEngineCallback;
 
 public class GameEngineImpl implements GameEngine {
 
-	private ArrayList<Player> players;
-	private ArrayList<GameEngineCallback> callbacks;
+	private ArrayList<Player> players = new ArrayList<Player>();
+	private ArrayList<GameEngineCallback> callbacks = new ArrayList<GameEngineCallback>();
 	private ArrayList<PlayingCard> pc = new ArrayList<PlayingCard>();
-	
-	
 
+
+
+	
 	public GameEngineImpl() {
 
 	}	
-
+	@Override
 	public void dealPlayer(Player player, int delay) {
+		
+		int total = 0;
+		
+		getShuffledDeck();
+		
+		ArrayList<PlayingCard> playersHand = new ArrayList<PlayingCard>();
+		
+		for(int i = 0; total < BUST_LEVEL ; i++) {
+			
+			playersHand.add(pc.get(i));
+			
+			total += pc.get(i).getScore();		
+		} 
+		
+		
+		
 	}
-
+	@Override
 	public void dealHouse(int delay) {
-	}
 
+
+	}
+	@Override
 	public void addPlayer(Player player) {
 
-		players.add(player);
-
+		if (player == null ) {
+			players.add(player);
+		}	
 	}
-
+	@Override
 	public Player getPlayer(String id) {
 
 		Player a = null;
@@ -48,13 +68,14 @@ public class GameEngineImpl implements GameEngine {
 			if (players.get(i).getPlayerId().equalsIgnoreCase(id)) {
 
 				a = players.get(i);
+				break;
 			}
 
 		}
 		return a;
 
 	}
-
+	@Override
 	public boolean removePlayer(Player player) {
 
 		boolean a = false;
@@ -68,33 +89,30 @@ public class GameEngineImpl implements GameEngine {
 		return a;
 
 	}
-
+	@Override
 	public Collection<Player> getAllPlayers() {
 
-		return players;
+		return Collections.unmodifiableCollection(players);
 	}
-
+	@Override
 	public boolean placeBet(Player player, int bet) {
-
-		boolean check = false;
-
+		
 		if (players.contains(player)) {
 			player.placeBet(bet);
-			check = true;
+			return true;
 		} else
-			check = false;
+			return false;
 
-		return check;
 	}
-
+	@Override
 	public void addGameEngineCallback(GameEngineCallback gameEngineCallback) {
 
-		if (callbacks.contains(gameEngineCallback) == false) {
+		if (gameEngineCallback == null && callbacks.contains(gameEngineCallback) == false) {
 			callbacks.add(gameEngineCallback);
 		}
 
 	}
-
+	@Override
 	public boolean removeGameEngineCallback(GameEngineCallback gameEngineCallback) {
 
 		if (callbacks.contains(gameEngineCallback)) {
@@ -104,19 +122,20 @@ public class GameEngineImpl implements GameEngine {
 			return false;
 
 	}
-
+	@Override
 	public Deque<PlayingCard> getShuffledDeck() {
-	
-		for (Suit s : Suit.values()) {
-		    for (Value v : Value.values()) {
-		    	PlayingCardImpl c = new PlayingCardImpl(s,v);
-		    	
-		    }  
-		}	
-    Collections.shuffle(pc);
-	
-	Deque<PlayingCard> shuffledDeck = new LinkedList<PlayingCard>(pc);
 		
-	return shuffledDeck; }		
-	
+		for (Suit s : Suit.values()) {
+			for (Value v : Value.values()) {
+				PlayingCardImpl c = new PlayingCardImpl(s,v);
+				pc.add(c);
+			}  
+		}	
+
+		Collections.shuffle(pc);
+
+		Deque<PlayingCard> shuffledDeck = new LinkedList<PlayingCard>(pc);
+
+		return shuffledDeck; }		
+
 }

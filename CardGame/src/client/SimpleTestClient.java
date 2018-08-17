@@ -46,8 +46,8 @@ public class SimpleTestClient
       gameEngine.addGameEngineCallback(new GameEngineCallbackImpl());
 
       // Uncomment this to DEBUG your deck of cards creation
-      //		Deque<PlayingCard> shuffledDeck = gameEngine.getShuffledDeck();
-      //		printCards(shuffledDeck);
+      		Deque<PlayingCard> shuffledDeck = gameEngine.getShuffledDeck();
+      		printCards(shuffledDeck);
 
       // main loop to add players, place a bet and receive hand
       for (Player player : players)
@@ -63,7 +63,7 @@ public class SimpleTestClient
    }
 
    @SuppressWarnings("unused")
-   private static void printCard s(Deque<PlayingCard> deck)
+   private static void printCards(Deque<PlayingCard> deck)
    {
       for (PlayingCard card : deck)
          logger.log(Level.INFO, card.toString());

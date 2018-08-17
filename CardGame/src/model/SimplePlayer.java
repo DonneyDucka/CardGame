@@ -26,6 +26,7 @@ public class SimplePlayer implements Player {
 	}
 	
 	public void setPlayerName(String playerName) {	
+	name = playerName;
 	}
 	
 	public int getPoints() {
@@ -68,8 +69,8 @@ public class SimplePlayer implements Player {
 	}
 
 	public int getResult() {
-		int a = 0;
-		return a;
+		
+		return GameEngineCallbackImpl.
 	}
 	
 	public void setResult(int result) {
@@ -79,10 +80,9 @@ public class SimplePlayer implements Player {
 	public String toString() {
 		
 		String details = 
-				String.format("%/5s %/n", "Player Id : ", getPlayerId()) +
-				String.format("%/5s %/n", "Player Name : ", getPlayerName()) + 
-				String.format("%/5s %/n", "Player's Points : ", getPoints()) + 
-				String.format("%/5s %/n", "Player's bet : ", getBet());
+				"Player Id : " + getPlayerId() +
+				"  Player Name : "+ getPlayerName() + 
+				"  Player's Points : " + getPoints();
 		return details;
 		
 	}
